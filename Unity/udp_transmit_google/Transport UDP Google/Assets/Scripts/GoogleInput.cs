@@ -30,7 +30,8 @@ public class GoogleInput : MonoBehaviour
         foreach (var hand in AllHands)
         {
             GvrControllerInputDevice device = GvrControllerInput.GetDevice(hand);
-            if (device.GetButtonDown(pointerButtonMask))
+            //if (device.GetButtonDown(pointerButtonMask))
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 cube.SetActive(!cube.activeSelf);
                 transmitUDP.SendString(message);
