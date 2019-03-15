@@ -1,0 +1,10 @@
+<manifest xmlns:ml="magicleap" ml:developer_id="temporarycertificates" ml:package="com.terrortronics.transmitudpmagicleap" ml:version_code="1" ml:version_name="">
+  <application ml:min_api_level="3" ml:sdk_version="1.0" ml:visible_name="Transmit UDP MagicLeap">
+    <uses-privilege ml:name="LowLatencyLightwear" />
+    <uses-privilege ml:name="Internet" />
+    <uses-privilege ml:name="LocalAreaNetwork" />
+    <component ml:binary_name="bin/Player.elf" ml:name=".fullscreen" ml:type="Fullscreen" ml:visible_name="Transmit UDP MagicLeap">
+      <icon ml:model_folder="Icon/Model" ml:portal_folder="Icon/Portal" />
+    </component>
+  </application>
+</manifest>
