@@ -50,6 +50,8 @@ namespace UnityEngine.XR.MagicLeap
     /// </summary>
     public class HandTracking : MonoBehaviour
     {
+        public TransmitUDP transmitUDP;
+
         #region Private Variables
         [Space, SerializeField, BitMask(typeof(KeyPoseTypes)), Tooltip("All KeyPoses to be tracked")]
         private KeyPoseTypes _trackedKeyPoses;
@@ -108,6 +110,7 @@ namespace UnityEngine.XR.MagicLeap
             if ((_trackedKeyPoses ^ TrackedKeyPoses) != 0)
             {
                 UpdateKeyPoseStates(true);
+                //transmitUDP.SendString("Hello!");
             }
         }
         #endregion
@@ -185,7 +188,12 @@ namespace UnityEngine.XR.MagicLeap
             {
                 Debug.LogError("Error: HandTracking failed enabling tracked KeyPoses, disabling script.");
                 enabled = false;
+                //transmitUDP.SendString("Hello!");
                 return;
+            }
+            else
+            {
+                //transmitUDP.SendString("Hello!");
             }
         }
         #endregion

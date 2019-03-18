@@ -22,6 +22,9 @@ namespace MagicLeap
     [RequireComponent(typeof(SpriteRenderer))]
     public class KeyPoseVisualizer : MonoBehaviour
     {
+        public TransmitUDP transmitUDP;
+        bool block = false;
+
         #region Private Variables
         [SerializeField, Tooltip("KeyPose to track.")]
         private MLHandKeyPose _keyPoseToTrack;
@@ -66,6 +69,23 @@ namespace MagicLeap
                 currentColor.r = 1.0f - confidenceValue;
                 currentColor.g = 1.0f;
                 currentColor.b = 1.0f - confidenceValue;
+
+                if (transmitUDP != null && block == false && MLHands.Right.KeyPose == MLHandKeyPose.OpenHandBack)
+                {
+                    transmitUDP.SendString("Hello!");
+                    block = true;
+                }
+                /*
+                else if (transmitUDP != null && MLHands.Left.KeyPose == MLHandKeyPose.Fist)
+                {
+                    transmitUDP.SendString("Hello!");
+                    block = false;
+                }
+                */
+            }
+            else
+            {
+                block = false;
             }
 
             _spriteRenderer.material.color = currentColor;
