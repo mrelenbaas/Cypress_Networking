@@ -16,7 +16,7 @@ void loop() {
   
   Serial.println(photodiode);
   //delay(500);
-  if (photodiode <= 50)
+  if (photodiode <= 46)
   {
     digitalWrite(LED_BUILTIN, HIGH);
     digitalWrite(8, HIGH);

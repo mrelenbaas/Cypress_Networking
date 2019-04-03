@@ -1,5 +1,6 @@
 package com.terrortronics.udptransmit;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -8,47 +9,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.text.DateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     final String message = "Hello!\n";
     final String IPAdress = "192.168.0.1";
 
-    private class MessageSender extends AsyncTask<String, Void, Void> {
-        @Override
-        protected Void doInBackground(String... voids) {
-
-            Log.d("SOMETHING", "SENDING MESSAGE -2");
-            int serverPort = 50007;
-
-            Log.d("SOMETHING", "SENDING MESSAGE -1");
-            try {
-                DatagramSocket s = new DatagramSocket();
-                Log.d("SOMETHING", "SENDING MESSAGE 0");
-                InetAddress inetAddress = InetAddress.getByName(IPAdress);
-                Log.d("SOMETHING", "SENDING MESSAGE 1");
-                byte[] tempMessage = message.getBytes();
-                Log.d("SOMETHING", "SENDING MESSAGE 2");
-                DatagramPacket d = new DatagramPacket(
-                        tempMessage,
-                        message.length(),
-                        inetAddress,
-                        serverPort
-                );
-                Log.d("SOMETHING", "SENDING MESSAGE 3");
-                s.send(d);
-                Log.d("SOMETHING", "SENDING MESSAGE 4");
-            } catch (Exception e) {
-                System.err.println(e);
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-    }
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,31 +29,91 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button button = findViewById(R.id.button);
+        button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("SOMETHING", "CLICK 1");
                 MessageSender messageSender = new MessageSender();
-                Log.d("SOMETHING", "CLICK 2");
                 messageSender.execute();
-                Log.d("SOMETHING", "CLICK 3");
             }
         });
+        button.setBackgroundColor(Color.WHITE);
 
-        /*
-        new Thread(new Runnable() {
+        startServerSocket();
+    }
+
+    private void startServerSocket() {
+
+        Thread thread = new Thread(new Runnable() {
+
+            private String stringData = null;
+
             @Override
             public void run() {
-                while(true) {
-                    try {
 
-                    } catch(Exception e) {
+                byte[] msg = new byte[1000];
+                DatagramPacket dp = new DatagramPacket(msg, msg.length);
+                DatagramSocket ds = null;
+                try {
+                    ds = new DatagramSocket(50007);
+                    //ds.setSoTimeout(50000);
+                    ds.receive(dp);
 
+                    stringData = new String(msg, 0, dp.getLength());
+                    if (stringData.contains("on"))
+                    {
+                        button.setBackgroundColor(Color.RED);
+                    }
+                    else if (stringData.contains("off"))
+                    {
+                        button.setBackgroundColor(Color.WHITE);
+                    }
+                    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    stringData = stringData + " " + currentDateTimeString;
+                    Log.d("SOMETHING", stringData);
+                    //updateUI(stringData);
+
+                    //String msgToSender = "Bye Bye ";
+                    //dp = new DatagramPacket(msgToSender.getBytes(), msgToSender.length(), dp.getAddress(), dp.getPort());
+                    //ds.send(dp);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (ds != null) {
+                        ds.close();
+                        startServerSocket();
                     }
                 }
             }
-        }).start();
-        */
+
+        });
+        thread.start();
+    }
+
+    private class MessageSender extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... voids) {
+
+            int serverPort = 50007;
+
+            try {
+                DatagramSocket s = new DatagramSocket();
+                InetAddress inetAddress = InetAddress.getByName(IPAdress);
+                byte[] tempMessage = message.getBytes();
+                DatagramPacket d = new DatagramPacket(
+                        tempMessage,
+                        message.length(),
+                        inetAddress,
+                        serverPort
+                );
+                s.send(d);
+            } catch (Exception e) {
+                System.err.println(e);
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 }
