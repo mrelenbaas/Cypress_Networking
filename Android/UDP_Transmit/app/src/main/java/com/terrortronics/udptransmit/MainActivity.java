@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String message = "Hello!\n";
+    final String message = "Hello!";
     final String IPAdress = "192.168.0.1";
 
     Button button;

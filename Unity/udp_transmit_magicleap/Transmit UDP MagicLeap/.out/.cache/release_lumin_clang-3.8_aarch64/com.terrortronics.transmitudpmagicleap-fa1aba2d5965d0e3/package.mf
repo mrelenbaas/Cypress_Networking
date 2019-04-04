@@ -16,16 +16,16 @@
   },
   {
    "compression": 8,
-   "hash": "f4209e250fdcd9348f741c5e9d945b1ea465a9b2",
+   "hash": "471660a0e6189c81cdfcd2726effc47faf631ddf",
    "pkgpath": "Data/Managed/Metadata/global-metadata.dat",
-   "size": 2838696,
+   "size": 2840864,
    "src": "C:/Users/Terrortronics/Documents/Cypress_Networking/Unity/udp_transmit_magicleap/Transmit UDP MagicLeap/Temp/StagingArea/Data/Managed/Metadata/global-metadata.dat"
   },
   {
    "compression": 8,
-   "hash": "67a74e22722b6ee39a4bbcd3904bf325e370ee4e",
+   "hash": "ca2adfc0eeaef2b5c1cd7d524739e37474555a20",
    "pkgpath": "bin/libil2cpp.so",
-   "size": 34586224,
+   "size": 34611000,
    "src": "C:/Users/Terrortronics/Documents/Cypress_Networking/Unity/udp_transmit_magicleap/Transmit UDP MagicLeap/Temp/StagingArea/Data/Native/libil2cpp.so",
    "xfrm_flags": {
     "signed": {
@@ -36,9 +36,9 @@
      "version": 3
     }
    },
-   "xfrm_hash": "307a153f84cfd901616d6587e652f7042cdbd0f9",
+   "xfrm_hash": "1b5a059577e64b4b6cb823f3a7183bffe6a2c9fb",
    "xfrm_path": "C:/Users/Terrortronics/Documents/Cypress_Networking/Unity/udp_transmit_magicleap/Transmit UDP MagicLeap/.out/.cache/release_lumin_clang-3.8_aarch64/com.terrortronics.transmitudpmagicleap-fa1aba2d5965d0e3\\libil2cpp.so-f786f361a1362d77",
-   "xfrm_size": 34586982
+   "xfrm_size": 34611758
   },
   {
    "compression": 8,
@@ -181,23 +181,23 @@
   },
   {
    "compression": 8,
-   "hash": "37d8edd2c9944ac30646ad0d72ef1425234f889f",
+   "hash": "7949c903d7161a12dfd7ce3b88f9992a93ae99ec",
    "pkgpath": "Data/globalgamemanagers",
    "size": 35008,
    "src": "C:/Users/Terrortronics/Documents/Cypress_Networking/Unity/udp_transmit_magicleap/Transmit UDP MagicLeap/Temp/StagingArea/Data/globalgamemanagers"
   },
   {
    "compression": 8,
-   "hash": "d21d81c1203ccd7ab5c4a1c908b7b80596ec0958",
+   "hash": "269207a56daf7e574a38120be0412d28b1e6ef13",
    "pkgpath": "Data/globalgamemanagers.assets",
    "size": 36544,
    "src": "C:/Users/Terrortronics/Documents/Cypress_Networking/Unity/udp_transmit_magicleap/Transmit UDP MagicLeap/Temp/StagingArea/Data/globalgamemanagers.assets"
   },
   {
    "compression": 8,
-   "hash": "867e45948d1a935d4bf083427c9127571134addd",
+   "hash": "2cf85fed611051655efb0e2318bfab37bc0571e8",
    "pkgpath": "Data/level0",
-   "size": 11408,
+   "size": 13344,
    "src": "C:/Users/Terrortronics/Documents/Cypress_Networking/Unity/udp_transmit_magicleap/Transmit UDP MagicLeap/Temp/StagingArea/Data/level0"
   },
   {
@@ -209,9 +209,9 @@
   },
   {
    "compression": 8,
-   "hash": "373010051f376b0189cb371e219a2d5ba5166c2a",
+   "hash": "d6b2f517b7a3f265d6c26b5665fb753bbe62e7d2",
    "pkgpath": "Data/sharedassets0.assets",
-   "size": 524060,
+   "size": 524172,
    "src": "C:/Users/Terrortronics/Documents/Cypress_Networking/Unity/udp_transmit_magicleap/Transmit UDP MagicLeap/Temp/StagingArea/Data/sharedassets0.assets"
   },
   {
