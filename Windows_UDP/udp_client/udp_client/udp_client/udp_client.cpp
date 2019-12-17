@@ -19,9 +19,9 @@ int main(int argc, char* argv[])
 
     sockaddr_in server;
     server.sin_family = AF_INET;
-    server.sin_port = htons(54000);
+    server.sin_port = htons(1234);
 
-    inet_pton(AF_INET, "127.0.0.1", &server.sin_addr);
+    inet_pton(AF_INET, "192.168.1.2", &server.sin_addr);
 
     SOCKET out = socket(AF_INET, SOCK_DGRAM, 0);
 

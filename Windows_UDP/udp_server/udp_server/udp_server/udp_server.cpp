@@ -20,7 +20,7 @@ int main()
     sockaddr_in serverHint;
     serverHint.sin_addr.S_un.S_addr = ADDR_ANY;
     serverHint.sin_family = AF_INET;
-    serverHint.sin_port = htons(54000);
+    serverHint.sin_port = htons(1234);
 
     if (bind(in, (sockaddr*)&serverHint, sizeof(serverHint)) == SOCKET_ERROR)
     {
