@@ -27,12 +27,9 @@ std::string exec(const char* cmd) {
 
 std::string find_my_ip_address()
 {
-    //std::string address;
-    //std::system("ipconfig");
+    std::string something;
     std::string result = exec("ipconfig");
 
-    std::cout << "HERE HERE HERE" << std::endl;
-    //std::string s = "scott>=tiger>=mushroom";
     std::string s = result;
     std::string delimiter = "\n";
     size_t pos = 0;
@@ -40,30 +37,69 @@ std::string find_my_ip_address()
     std::string token;
     while ((pos = s.find(delimiter)) != std::string::npos) {
         token = s.substr(0, pos);
-        //std::cout << count << std::endl;
         ++count;
-        //std::cout << token << std::endl;
         if ((token.find("IPv4 Address") != std::string::npos)
             && (token.find("192.168.1.") != std::string::npos))
         {
             std::string address = token.replace(token.begin(), token.begin() + 39, "");
-            //std::string address2 = address.replace(address.end()-1, address.end(), "");
-            //std::cout << count << std::endl;
-            std::cout << address << std::endl;
-            return address;
+            something = address;
         }
         s.erase(0, pos + delimiter.length());
     }
-    //std::cout << "HERE HERE HERE" << std::endl;
+
+    return something;
+}
+
+std::string find_other_ip_address(std::string my_ip_address)
+{
+    std::string something;
+    std::string result = exec("nmap -sP 192.168.1.0/24");
+
     //std::cout << result << std::endl;
-    //return address;
+
+    std::string s = result;
+    std::string delimiter = "\n";
+    size_t pos = 0;
+    int count = 0;
+    std::string token;
+    int index = 0;
+    int index_mac = 0;
+    while ((pos = s.find(delimiter)) != std::string::npos) {
+        token = s.substr(0, pos);
+        ++count;
+        if ((token.find("Nmap scan report for") != std::string::npos)
+            && (token.find("192.168.1.") != std::string::npos))
+        {
+            if (token.find(my_ip_address) != std::string::npos)
+            {
+                ++index;
+                s.erase(0, pos + delimiter.length());
+                continue;
+            }
+            if (token.find("192.168.1.1") != std::string::npos)
+            {
+                ++index;
+                s.erase(0, pos + delimiter.length());
+                continue;
+            }
+            something = token.replace(token.begin(), token.begin() + 21, "");
+            index_mac = index + 2;
+            std::cout << token << std::endl;
+        }
+        ++index;
+        s.erase(0, pos + delimiter.length());
+    }
+
+    return something;
 }
 
 int main(int argc, char* argv[])
 {
-    find_my_ip_address();
+    std::string my_ip_address = find_my_ip_address();
+    std::cout << my_ip_address << std::endl;
 
-    /*
+    std::string other_ip_address = find_other_ip_address(my_ip_address);
+
     WSADATA data;
     WORD version = MAKEWORD(2, 2);
     int wsOK = WSAStartup(version, &data);
@@ -76,7 +112,8 @@ int main(int argc, char* argv[])
     server.sin_family = AF_INET;
     server.sin_port = htons(1234);
 
-    inet_pton(AF_INET, "192.168.1.2", &server.sin_addr);
+    inet_pton(AF_INET, other_ip_address.c_str(), &server.sin_addr);
+    std::cout << other_ip_address.c_str() << std::endl;
 
     SOCKET out = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -90,5 +127,4 @@ int main(int argc, char* argv[])
 
     closesocket(out);
     WSACleanup();
-    */
 }
