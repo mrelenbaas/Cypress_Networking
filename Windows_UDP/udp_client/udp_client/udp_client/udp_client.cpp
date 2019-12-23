@@ -12,6 +12,10 @@
 
 #pragma comment (lib, "ws2_32.lib")
 
+
+std::string my_ip_address;
+std::string other_ip_address;
+
 std::string exec(const char* cmd) {
     std::array<char, 128> buffer;
     std::string result;
@@ -50,7 +54,7 @@ std::string find_my_ip_address()
     return something;
 }
 
-std::string find_other_ip_address(std::string my_ip_address)
+std::string find_other_ip_address()
 {
     std::string something;
     std::string result = exec("nmap -sP 192.168.1.0/24");
@@ -95,10 +99,10 @@ std::string find_other_ip_address(std::string my_ip_address)
 
 int main(int argc, char* argv[])
 {
-    std::string my_ip_address = find_my_ip_address();
+    my_ip_address = find_my_ip_address();
     std::cout << my_ip_address << std::endl;
 
-    std::string other_ip_address = find_other_ip_address(my_ip_address);
+    other_ip_address = find_other_ip_address();
 
     WSADATA data;
     WORD version = MAKEWORD(2, 2);
