@@ -19,7 +19,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     final String message = "Hello!";
-    final String IPAdress = "192.168.0.1";
+    final String IPAdress = "192.168.1.3";
 
     Button button;
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... voids) {
 
-            int serverPort = 50007;
+            int serverPort = 1234;
 
             try {
                 DatagramSocket s = new DatagramSocket();
